@@ -173,21 +173,11 @@ export default function AdminOrdersPage() {
                       }
                       className="text-xs font-bold px-3 py-1.5 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 outline-none focus:border-indigo-500 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      <option value="pending">
-                        🟡 Menunggu Diproses (Pending)
-                      </option>
-                      <option value="processing">
-                        🔵 Sedang Dikemas (Processing)
-                      </option>
-                      <option value="shipping">
-                        🟣 Dalam Pengiriman (Shipping)
-                      </option>
-                      <option value="completed">
-                        🟢 Pesanan Selesai (Completed)
-                      </option>
-                      <option value="cancelled">
-                        🔴 Dibatalkan (Cancelled)
-                      </option>
+                      <option value="pending">🟡 Menunggu Diproses</option>
+                      <option value="processing">🔵 Sedang Dikemas</option>
+                      <option value="shipping">🟣 Dalam Pengiriman</option>
+                      <option value="completed">🟢 Pesanan Selesai</option>
+                      <option value="cancelled">🔴 Dibatalkan</option>
                     </select>
                   </div>
                 </div>
