@@ -111,11 +111,11 @@ export default function AdminIncomePage() {
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-6xl mx-auto">
-      {/* HEADER & FILTER */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="p-4 md:p-6 space-y-6 max-w-6xl mx-auto text-gray-800">
+      {/* HEADER & FILTER TANGGAL RESPONSIF */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-xl md:text-2xl font-bold text-gray-900">
             Laporan Pendapatan
           </h1>
           <p className="text-xs text-gray-500 mt-0.5">
@@ -123,41 +123,50 @@ export default function AdminIncomePage() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 bg-white p-2 rounded-2xl border border-gray-200 shadow-2xs">
-          <div className="flex items-center gap-1.5 text-xs text-gray-600 px-1">
-            <Calendar className="size-4 text-indigo-600 shrink-0" />
+        {/* BOX FILTER TANGGAL (Rapi di Mobile & Desktop) */}
+        <div className="bg-white p-3 rounded-2xl border border-gray-200 shadow-2xs flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto">
+          {/* Input Tanggal Mulai s/d Sampai */}
+          <div className="flex items-center gap-1.5 text-xs text-gray-600 w-full sm:w-auto">
+            <Calendar className="size-4 text-indigo-600 shrink-0 hidden sm:block" />
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="border border-gray-200 rounded-lg px-2 py-1 outline-none text-xs bg-gray-50 focus:bg-white focus:border-indigo-500"
+              className="w-full sm:w-auto border border-gray-200 rounded-xl px-2.5 py-1.5 outline-none text-xs bg-gray-50 focus:bg-white focus:border-indigo-500 transition-all cursor-pointer"
             />
-            <span className="text-gray-400 font-bold">s/d</span>
+            <span className="text-gray-400 font-bold px-0.5 text-xs shrink-0">
+              s/d
+            </span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="border border-gray-200 rounded-lg px-2 py-1 outline-none text-xs bg-gray-50 focus:bg-white focus:border-indigo-500"
+              className="w-full sm:w-auto border border-gray-200 rounded-xl px-2.5 py-1.5 outline-none text-xs bg-gray-50 focus:bg-white focus:border-indigo-500 transition-all cursor-pointer"
             />
           </div>
 
-          {(startDate || endDate) && (
-            <button
-              onClick={handleResetFilter}
-              className="p-1.5 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-red-600 transition-colors"
-              title="Hapus Filter Tanggal"
-            >
-              <X className="size-4" />
-            </button>
-          )}
+          {/* Tombol Aksi (Reset & Refresh) */}
+          <div className="flex items-center justify-end gap-1.5 pt-1 sm:pt-0 border-t sm:border-t-0 border-gray-100">
+            {(startDate || endDate) && (
+              <button
+                onClick={handleResetFilter}
+                className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-xs font-semibold transition-colors"
+                title="Hapus Filter Tanggal"
+              >
+                <X className="size-3.5" />
+                <span className="sm:hidden">Reset</span>
+              </button>
+            )}
 
-          <button
-            onClick={fetchIncomeData}
-            className="p-1.5 hover:bg-gray-100 rounded-lg text-gray-600 transition-colors"
-            title="Refresh Data"
-          >
-            <RefreshCw className="size-4" />
-          </button>
+            <button
+              onClick={fetchIncomeData}
+              className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl text-xs font-semibold transition-colors"
+              title="Refresh Data"
+            >
+              <RefreshCw className="size-3.5" />
+              <span className="sm:hidden">Refresh</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -176,7 +185,7 @@ export default function AdminIncomePage() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs whitespace-nowrap">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200 text-gray-600 font-bold uppercase tracking-wider">
                   <th className="py-3 px-4">Tanggal</th>
@@ -217,7 +226,7 @@ export default function AdminIncomePage() {
                 ))}
               </tbody>
 
-              {/* FOOTER TOTAL SEJAJAR KOLOM */}
+              {/* FOOTER TOTAL */}
               <tfoot>
                 <tr className="bg-indigo-50/60 border-t-2 border-indigo-100 font-bold text-gray-900">
                   <td
