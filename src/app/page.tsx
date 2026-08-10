@@ -89,6 +89,24 @@ export default function HomePage() {
 
     if (user) {
       setIsLoggedIn(true);
+
+      // --- TAMBAHAN: CEK APAKAH USER ADALAH ADMIN ---
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name, role")
+        .eq("id", user.id)
+        .single();
+
+      if (profile) {
+        setUserName(profile.full_name || "");
+
+        // JIKA ADMIN MENCOBA AKSES HALAMAN CUSTOMER -> LEMPAR KE DASHBOARD ADMIN
+        if (profile.role === "admin") {
+          router.replace("/admin/dashboard");
+          return;
+        }
+      }
+
       // Ambil total item keranjang
       const { count } = await supabase
         .from("cart_items")
@@ -103,7 +121,7 @@ export default function HomePage() {
     if (productData) setProducts(productData);
 
     setLoading(false);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
