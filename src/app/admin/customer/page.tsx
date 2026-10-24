@@ -79,7 +79,7 @@ export default function AdminCustomersPage() {
             Kelola Pelanggan
           </h1>
           <p className="text-sm text-gray-500">
-            Daftar pengguna yang terdaftar di sistem toko
+            Daftar pelanggan toko
           </p>
         </div>
       </div>
